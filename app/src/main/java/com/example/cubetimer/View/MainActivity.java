@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     }
 
     private void init() {
-        timerFragment = new TimeFragment();
+        timerFragment = new TimerFragment();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container, timerFragment).commit();
 
