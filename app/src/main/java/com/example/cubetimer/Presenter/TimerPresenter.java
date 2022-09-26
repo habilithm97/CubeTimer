@@ -6,4 +6,9 @@ public class TimerPresenter implements TimerContract.Presenter {
     public TimerPresenter(TimerContract.View view) {
         this.view = view;
     }
+
+    @Override
+    public void scrambleAction() {
+        view.scrambleResult();
+    }
 }
