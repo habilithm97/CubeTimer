@@ -55,7 +55,14 @@ public class TimerFragment extends Fragment implements TimerContract.View {
         for(int i = 1; i <= 25; i++) {
             int x = random.nextInt(scrambleArray.length);
             finalScramble.add(scrambleArray[x]);
-            scrambleTv.setText(finalScramble + "");
+
+            // ArrayList의 대괄호와 쉼표 제거 후 출력 -> str과 " "만 출력함
+            StringBuilder sb = new StringBuilder();
+            for(String str : finalScramble) {
+                sb.append(str);
+                sb.append(" ");
+            }
+            scrambleTv.setText(sb.toString());
         }
     }
 
