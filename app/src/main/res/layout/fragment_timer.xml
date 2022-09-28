@@ -29,7 +29,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
 
-        android:text="0.00"
-        android:textSize="100sp" />
+        android:text="00:00.00"
+        android:textSize="70sp" />
 
 </LinearLayout>

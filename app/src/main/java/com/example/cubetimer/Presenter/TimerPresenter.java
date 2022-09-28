@@ -11,4 +11,9 @@ public class TimerPresenter implements TimerContract.Presenter {
     public void scrambleAction() {
         view.scrambleResult();
     }
+
+    @Override
+    public void timerAction() {
+        view.timerResult();
+    }
 }
