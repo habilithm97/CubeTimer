@@ -2,6 +2,7 @@ package com.example.cubetimer.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -14,7 +15,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity implements MainContract.View {
     MainContract.Presenter presenter;
 
+    //GragphFragment graphFragment;
     TimerFragment timerFragment;
+    RecordFragment recordFragment;
 
     BottomNavigationView bottomNavi;
 
@@ -28,7 +31,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     }
 
     private void init() {
+        //graphFragment = new GraphFragment();
         timerFragment = new TimerFragment();
+        recordFragment = new RecordFragment();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container, timerFragment).commit();
 
@@ -38,12 +43,15 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.tab1:
+                        //getSupportFragmentManager().beginTransaction().replace(R.id.container, graphFragment).commit();
                         return true;
 
                     case R.id.tab2:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, timerFragment).commit();
                         return true;
 
                     case R.id.tab3:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, recordFragment).commit();
                         return true;
                 }
                 return false;

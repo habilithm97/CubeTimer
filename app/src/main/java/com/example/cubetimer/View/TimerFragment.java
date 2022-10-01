@@ -1,9 +1,11 @@
 package com.example.cubetimer.View;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
 import android.os.Message;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cubetimer.Presenter.TimerContract;
 import com.example.cubetimer.Presenter.TimerPresenter;
@@ -35,7 +38,8 @@ public class TimerFragment extends Fragment implements TimerContract.View {
     int btnCnt = 0;
     int i = 0;
     Thread timeThread = null;
-    TextView timeTv;
+
+    Button time;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,8 +53,8 @@ public class TimerFragment extends Fragment implements TimerContract.View {
 
         scrambleTv = rootView.findViewById(R.id.scrambleTv);
 
-        Button btn = rootView.findViewById(R.id.btn);
-        btn.setOnClickListener(new View.OnClickListener() {
+        time = rootView.findViewById(R.id.time);
+        time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finalScramble.clear();
@@ -58,8 +62,6 @@ public class TimerFragment extends Fragment implements TimerContract.View {
                 timerPresenter.timerAction();
             }
         });
-
-        timeTv = rootView.findViewById(R.id.timeTv);
     }
 
     @Override
@@ -80,19 +82,30 @@ public class TimerFragment extends Fragment implements TimerContract.View {
 
     @Override
     public void timerResult() {
-        if(btnCnt == 0) {
+        if(btnCnt == 0) { // 실행
             timeThread = new Thread(new TimeThread());
             timeThread.start();
             isRunning = true;
             btnCnt++;
 
-            if(!timeTv.getText().toString().equals("00:00.00")) {
+            if(!time.getText().toString().equals("00:00.00")) {
                 i = 0;
-                timeTv.setText("00:00.00");
+                time.setText("00:00.00");
             }
-        } else if(btnCnt == 1) {
+        } else if(btnCnt == 1) { // 정지
             isRunning = !isRunning;
             btnCnt--;
+
+            /*
+            String resultRecord = timeTv.getText().toString();
+            String resultScramble = scrambleTv.getText().toString();
+
+            Bundle bundle = new Bundle();
+            bundle.putString("resultRecord", resultRecord);
+            bundle.putString("resultScramble", resultScramble);
+
+            RecordFragment recordFragment = new RecordFragment();
+            recordFragment.setArguments(bundle); */
         }
     }
 
@@ -104,7 +117,7 @@ public class TimerFragment extends Fragment implements TimerContract.View {
             int min = (msg.arg1 / 100) / 60;
 
             String result = String.format("%02d:%02d.%02d", min, sec, mSec);
-            timeTv.setText(result);
+            time.setText(result);
         }
     };
 

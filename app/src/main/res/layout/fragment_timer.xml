@@ -4,13 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:text="임시 버튼" />
-
     <TextView
         android:id="@+id/scrambleTv"
         android:layout_width="match_parent"
@@ -23,13 +16,15 @@
         android:text="U' F2 U R2 D F2 U R2 U' B U L2 D2 F U' R' F2 R2 D2"
         android:textSize="20sp"/>
 
-    <TextView
-        android:id="@+id/timeTv"
+    <Button
+        android:id="@+id/time"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
 
         android:text="00:00.00"
-        android:textSize="70sp" />
+        android:textSize="70sp"
+
+        android:background="#00ff0000"/>
 
 </LinearLayout>
