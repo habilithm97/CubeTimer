@@ -1,11 +1,9 @@
 package com.example.cubetimer.View;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
 import android.os.Message;
@@ -14,13 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.cubetimer.Presenter.TimerContract;
 import com.example.cubetimer.Presenter.TimerPresenter;
 import com.example.cubetimer.R;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -29,6 +24,7 @@ public class TimerFragment extends Fragment implements TimerContract.View {
     TimerPresenter timerPresenter;
 
     TextView scrambleTv;
+    Button time;
 
     String[] scrambleArray = {"U", "U'", "R", "R'", "L", "L'", "D", "D'", "F", "F'", "B", "B'", "U2", "R2", "L2", "D2", "F2", "B2"};
     ArrayList<String> finalScramble = new ArrayList<>();
@@ -39,7 +35,19 @@ public class TimerFragment extends Fragment implements TimerContract.View {
     int i = 0;
     Thread timeThread = null;
 
-    Button time;
+    //SendDataListener sendDataListener;
+
+    /*
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        try {
+            sendDataListener = (SendDataListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement SendDataListener");
+        }
+    } */
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,8 +65,6 @@ public class TimerFragment extends Fragment implements TimerContract.View {
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finalScramble.clear();
-                timerPresenter.scrambleAction();
                 timerPresenter.timerAction();
             }
         });
@@ -96,16 +102,18 @@ public class TimerFragment extends Fragment implements TimerContract.View {
             isRunning = !isRunning;
             btnCnt--;
 
+            finalScramble.clear(); // 이전 스크램블을 지우고
+            timerPresenter.scrambleAction(); // 새 스크램블 랜덤 발생
+
             /*
-            String resultRecord = timeTv.getText().toString();
+            String resultRecord = time.getText().toString();
             String resultScramble = scrambleTv.getText().toString();
 
             Bundle bundle = new Bundle();
             bundle.putString("resultRecord", resultRecord);
             bundle.putString("resultScramble", resultScramble);
 
-            RecordFragment recordFragment = new RecordFragment();
-            recordFragment.setArguments(bundle); */
+            sendDataListener.sendData(bundle); */
         }
     }
 

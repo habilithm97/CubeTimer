@@ -2,7 +2,6 @@ package com.example.cubetimer.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -69,4 +68,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
             bottomNavi.setSelectedItemId(R.id.tab3);
         }
     }
+
+    /*
+    @Override
+    public void sendData(Bundle bundle) {
+        Bundle bundle1 = bundle;
+        recordFragment.setArguments(bundle1);
+    } */
 }

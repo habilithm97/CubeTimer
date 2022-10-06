@@ -29,6 +29,10 @@ import java.util.Random;
 public class RecordFragment extends Fragment implements RecordContract.View {
     RecordPresenter recordPresenter;
 
+    //String resultRecord, resultScramble;
+
+    ItemAdapter adapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_record, container, false);
@@ -40,17 +44,23 @@ public class RecordFragment extends Fragment implements RecordContract.View {
         recordPresenter = new RecordPresenter(this);
 
         RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
-        ItemAdapter adapter = new ItemAdapter();
+        adapter = new ItemAdapter();
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
 
         /*
         Bundle bundle = getArguments();
-        String resultRecord = bundle.getString("resultRecord");
-        String resultScramble = bundle.getString("resultScramble");
-        Toast.makeText(getContext(), resultRecord + "\n" + resultScramble, Toast.LENGTH_SHORT).show();
-        adapter.addItem(new Model(resultRecord, resultScramble));
-        adapter.notifyDataSetChanged(); */
+        resultRecord = bundle.getString("resultRecord");
+        resultScramble = bundle.getString("resultScramble");
+
+        recordPresenter.addAction(); */
     }
+
+    /*
+    @Override
+    public void addResult() {
+        adapter.addItem(new Model(resultRecord, resultScramble));
+        adapter.notifyDataSetChanged();
+    } */
 }
