@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cubetimer.Presenter.TimerContract;
 import com.example.cubetimer.Presenter.TimerPresenter;
@@ -158,5 +159,7 @@ public class TimerFragment extends Fragment implements TimerContract.View {
 
         finalScramble.clear();
         timerPresenter.scrambleAction();
+
+        i = 0; // TimerFragment 실행 시 타이머 스레드 값을 0으로 초기화
     }
 }
