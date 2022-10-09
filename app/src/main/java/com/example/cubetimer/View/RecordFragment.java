@@ -46,6 +46,10 @@ public class RecordFragment extends Fragment implements RecordContract.View {
         RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
         adapter = new ItemAdapter();
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        // recyclerView 역순 처리
+        manager.setReverseLayout(true);
+        manager.setStackFromEnd(true);
+
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
 
