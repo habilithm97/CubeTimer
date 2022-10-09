@@ -1,5 +1,6 @@
 package com.example.cubetimer.View;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.example.cubetimer.Presenter.TimerContract;
 import com.example.cubetimer.Presenter.TimerPresenter;
 import com.example.cubetimer.R;
+import com.example.cubetimer.SendDataListener;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -35,9 +37,8 @@ public class TimerFragment extends Fragment implements TimerContract.View {
     int i = 0;
     Thread timeThread = null;
 
-    //SendDataListener sendDataListener;
+    SendDataListener sendDataListener;
 
-    /*
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -47,7 +48,7 @@ public class TimerFragment extends Fragment implements TimerContract.View {
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + " must implement SendDataListener");
         }
-    } */
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -102,18 +103,23 @@ public class TimerFragment extends Fragment implements TimerContract.View {
             isRunning = !isRunning;
             btnCnt--;
 
-            finalScramble.clear(); // 이전 스크램블을 지우고
-            timerPresenter.scrambleAction(); // 새 스크램블 랜덤 발생
+            // 타이머 정지 시 최근에 사용했던 스크램블을 기록하기 위해 0.1초의 딜레이 후 새 스크램블로 교체
+            Handler handler1 = new Handler();
+            handler1.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    finalScramble.clear(); // 이전 스크램블을 지우고
+                    timerPresenter.scrambleAction(); // 새 스크램블 랜덤 발생
+                }
+            }, 100);
 
-            /*
             String resultRecord = time.getText().toString();
             String resultScramble = scrambleTv.getText().toString();
 
             Bundle bundle = new Bundle();
             bundle.putString("resultRecord", resultRecord);
             bundle.putString("resultScramble", resultScramble);
-
-            sendDataListener.sendData(bundle); */
+            sendDataListener.sendData(bundle); // 번들에 데이터를 담아서 MainActivity로 전달
         }
     }
 

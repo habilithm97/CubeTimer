@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
-    ArrayList<Model> items = new ArrayList<>();
+    public static ArrayList<Model> items = new ArrayList<>();
 
     Context context;
 

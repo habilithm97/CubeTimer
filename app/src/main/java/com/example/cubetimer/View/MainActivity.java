@@ -9,9 +9,10 @@ import android.view.MenuItem;
 import com.example.cubetimer.Presenter.MainContract;
 import com.example.cubetimer.Presenter.MainPresenter;
 import com.example.cubetimer.R;
+import com.example.cubetimer.SendDataListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity implements MainContract.View {
+public class MainActivity extends AppCompatActivity implements MainContract.View, SendDataListener {
     MainContract.Presenter presenter;
 
     //GragphFragment graphFragment;
@@ -69,10 +70,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         }
     }
 
-    /*
     @Override
     public void sendData(Bundle bundle) {
+        // TimeFragment에서 번들을 받아서 RecordFragment에 전달
         Bundle bundle1 = bundle;
         recordFragment.setArguments(bundle1);
-    } */
+    }
 }

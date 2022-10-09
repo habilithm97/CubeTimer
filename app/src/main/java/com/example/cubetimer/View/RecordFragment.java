@@ -29,7 +29,7 @@ import java.util.Random;
 public class RecordFragment extends Fragment implements RecordContract.View {
     RecordPresenter recordPresenter;
 
-    //String resultRecord, resultScramble;
+    String resultRecord, resultScramble;
 
     ItemAdapter adapter;
 
@@ -49,18 +49,15 @@ public class RecordFragment extends Fragment implements RecordContract.View {
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
 
-        /*
-        Bundle bundle = getArguments();
+        Bundle bundle = getArguments(); // MainActivity에서 번들을 받음
         resultRecord = bundle.getString("resultRecord");
         resultScramble = bundle.getString("resultScramble");
-
-        recordPresenter.addAction(); */
+        recordPresenter.addAction();
     }
 
-    /*
     @Override
     public void addResult() {
         adapter.addItem(new Model(resultRecord, resultScramble));
-        adapter.notifyDataSetChanged();
-    } */
+        adapter.notifyItemInserted(ItemAdapter.items.size());
+    }
 }

@@ -3,10 +3,10 @@ package com.example.cubetimer.Presenter;
 public interface RecordContract {
 
     interface View {
-        //void addResult();
+        void addResult();
     }
 
     interface Presenter {
-        //void addAction();
+        void addAction();
     }
 }
